@@ -1,7 +1,8 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %}
 {% block content %}
 {% for product in products %}
-<div class="card" style="width: 18rem;">
+<div style="display: inline-block;">
+  <div class="card" style="width: 18rem;">
     <img src="{{ MEDIA_URL }}{{ product.productImage }}" class="card-img-top" alt="">
     <div class="card-body">
       <h5 class="card-title"> {{ product.productName }}</h5>
@@ -9,5 +10,6 @@
       <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   </div>
+</div>
 {% endfor %}
 {% endblock %}

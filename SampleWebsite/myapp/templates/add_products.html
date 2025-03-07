@@ -1,11 +1,11 @@
 {% extends 'base.html'%}{% block title %}Add Product{% endblock %}
 {% block content %}
-<form method="post" action="/add_products/">
+<form method="post" action="/add_products/" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit" , name="save">Create New</button>
 </form>
-{% if isAdded %}
+<!-- {% if isAdded %}
     <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
         <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
@@ -16,5 +16,5 @@
         Successfully added!!!
         </div>
     </div>
-{% endif %}
+{% endif %} -->
 {% endblock %}

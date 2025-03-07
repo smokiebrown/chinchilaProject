@@ -7,6 +7,7 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("todos/", views.todos, name="Todos"),
     path("create/", views.create, name="create"),
+    path("add_products/", views.add_products, name="add_product"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

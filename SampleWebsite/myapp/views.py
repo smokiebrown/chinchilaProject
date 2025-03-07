@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
-from .forms import CreateNewList
+from .forms import CreateNewList,Products
 from .models import TodoItem, Product
 from django.conf import settings
 
@@ -29,21 +29,21 @@ def create(response):
         form = CreateNewList()
     return  render(response, "create.html", {"form":form})
 
-def add_products(response):
+def add_products(request):
     isAdded = False
-    if response.method == "POST":
-        form = Product(response.POST)
-
+    if request.method == "POST":
+        form = Products(request.POST, request.FILES)
         if form.is_valid():
             n = form.cleaned_data["productName"]
             d = form.cleaned_data["productDesc"]
             p = form.cleaned_data["productPrice"]
-            i = form.cleaned_data["image"]
-            product=Product(productName=n, productDesc=d, productPrice=p, productImage=i)
+            i = form.cleaned_data["productImage"]
+            product=Product(productName=n,productDesc=d,productPrice=p,productImage=i)
             product.save()
-            isAdded=True
-        return HttpResponseRedirect("/add_products")
+            return HttpResponseRedirect("/")
+        else:
+            print(form.errors)
     else:
-        form = Product()
-    return  render(response, "create.html", {"form":form, "isAdded":isAdded})
+        form = Products()
+    return  render(request, "add_products.html", {"form":form, "isAdded":isAdded})
 
